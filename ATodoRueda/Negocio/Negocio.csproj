@@ -48,5 +48,11 @@
     <Compile Include="UsuarioDAO.cs" />
     <Compile Include="VehiculoDAO.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{9f5fe19f-cfad-49e0-af9d-1cfeb26ee4d6}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
