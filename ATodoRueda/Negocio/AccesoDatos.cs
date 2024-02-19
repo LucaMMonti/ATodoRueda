@@ -42,8 +42,9 @@ namespace Negocio
                 return true;
 
             }
-            catch (Exception )
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return false;
             }
 
