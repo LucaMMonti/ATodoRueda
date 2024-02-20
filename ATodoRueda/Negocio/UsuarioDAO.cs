@@ -79,7 +79,45 @@ namespace Negocio
                 finally
                 {
                     datos.cerrarConexion();
-                }         
+                }
+
         }
+            public Usuario IniciarSesion(string correo, string contraseña)
+            {
+                AccesoDatos datos = new AccesoDatos();
+                try
+                {
+                    datos.setearConsulta("SELECT Id, Nombre, Apellido, Rol, Estado FROM Usuarios WHERE CorreoElectronico = @CorreoElectronico AND Contrasena = @Contrasena AND Estado = 1");
+                    datos.agregarParametro("@CorreoElectronico", correo);
+                    datos.agregarParametro("@Contrasena", contraseña);
+                    datos.ejecutarLectura();
+
+                    if (datos.Lector.Read())
+                    {
+                        return new Usuario
+                        {
+                            Id = (int)datos.Lector["Id"],
+                            Nombre = datos.Lector["Nombre"].ToString(),
+                            Apellido = datos.Lector["Apellido"].ToString(),
+                            Rol = (int)datos.Lector["Rol"],
+                            Estado = (bool)datos.Lector["Estado"]
+                            // Puedes agregar más campos si son necesarios
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }
+
     }
 }
