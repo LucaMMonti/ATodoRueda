@@ -1,3 +1,4 @@
+use master
 Create DATABASE ATodoRueda
 go
 USE ATodoRueda
@@ -13,7 +14,8 @@ CREATE TABLE Usuarios (
     FechaNacimiento DATE,
     FechaRegistro DATETIME,
     Rol INT,    
-    Estado BIT
+    Estado BIT,
+    NumeroDocumento INT UNIQUE
 );
 GO
 CREATE TABLE Vehiculos (
