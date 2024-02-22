@@ -21,13 +21,14 @@ namespace ATodoRueda
                 string _apellido = txtApellido.Text;
                 string _correoElectronico = txtCorreoElectronico.Text;
                 string _contrasena = txtContrasena.Text;
+                int _numeroDocumento = int.Parse(txtNumeroDocumento.Text);
                 string _telefono = txtTelefono.Text;
                 string _direccion = txtDireccion.Text;
                 DateTime _fechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text);
                 int _rol = 3;
                 bool _estado = true;
                     
-            Usuario nuevoUsuario = new Usuario(_nombre, _apellido, _correoElectronico, _contrasena, _telefono, _direccion, _fechaNacimiento, _rol, _estado );
+            Usuario nuevoUsuario = new Usuario(_nombre, _apellido, _correoElectronico, _contrasena, _numeroDocumento, _telefono, _direccion, _fechaNacimiento, _rol, _estado );
 
 
                 if (usuarioDAO.Registrar(nuevoUsuario))

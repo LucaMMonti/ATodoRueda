@@ -28,6 +28,12 @@
             <asp:TextBox ID="txtContrasena" CssClass="form-control" runat="server" TextMode="Password" />
         </div>
 
+        <!-- Agrupación de Número Documneto -->
+        <div class="form-group">
+            <label for="txtNumeroDocumento">Número documento:</label>
+            <asp:TextBox ID="txtNumeroDocumento" CssClass="form-control" runat="server" />
+        </div>
+
         <!-- Agrupación de Fecha de Nacimiento -->
         <div class="form-group">
             <label for="txtFechaNacimiento">Fecha de nacimiento:</label>

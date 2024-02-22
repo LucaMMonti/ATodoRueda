@@ -16,6 +16,7 @@ namespace Dominio
     public class Usuario
     {
         public int Id { get; set; }
+        public int NumeroDocumento { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Contrasena { get; set; }
@@ -30,12 +31,13 @@ namespace Dominio
 
         public Usuario(){ }
 
-        public Usuario(string nombre, string apellido, string correoElectronico, string contrasena, string telefono, string direccion, DateTime fechaNacimiento, int rol, bool estado)
+        public Usuario(string nombre, string apellido, string correoElectronico, string contrasena, int numeroDocumento, string telefono, string direccion, DateTime fechaNacimiento, int rol, bool estado)
         {
             Nombre = nombre;
             Apellido = apellido;
             CorreoElectronico = correoElectronico;
             Contrasena = contrasena;
+            NumeroDocumento = numeroDocumento;
             Telefono = telefono;
             Direccion = direccion;
             FechaNacimiento = fechaNacimiento;
