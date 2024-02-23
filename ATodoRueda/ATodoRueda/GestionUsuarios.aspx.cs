@@ -13,19 +13,27 @@ namespace ATodoRueda
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LlenarRoles();
-                CargarUsuarios();
-            //    if (Session["Usuario"] != null && (Session["Usuario"] as Usuario).Rol == 1)
-            //    {
-            //        // El usuario es un administrador, puede continuar.
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("Default.aspx"); // Redireccionar a una página de "Acceso Denegado".
-            //    }
-            }
+           if (!IsPostBack)
+           {
+              if (Session["usuario"] != null && Session["Rol"] != null)
+              {
+                  var rolUsuario = (string)Session["Rol"];
+             
+                  if (rolUsuario == "1")
+                  {
+                      LlenarRoles();
+                      CargarUsuarios();
+                  }
+                  else
+                  {
+                      Response.Redirect("~/NoAutorizado.aspx");
+                  }
+              }
+              else
+              {
+                  Response.Redirect("~/InicioSesion.aspx");
+              }
+           }          
         }
 
         protected void btnAgregarUsuario_Click(object sender, EventArgs e)

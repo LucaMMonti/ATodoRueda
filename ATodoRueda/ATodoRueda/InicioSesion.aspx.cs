@@ -29,8 +29,8 @@ namespace ATodoRueda
 
             if (usuario != null)
             {
-
                 Session["usuario"] = usuario;
+                Session["Rol"] = usuario.Rol;
                 Response.Redirect("~/Default.aspx");
             }
             else

@@ -16,7 +16,23 @@ namespace ATodoRueda
         {
             if (!IsPostBack)
             {
-                CargarVehiculos();
+                if (Session["usuario"] != null && Session["Rol"] != null)
+                {
+                    var rolUsuario = (string)Session["Rol"];
+
+                    if (rolUsuario == "1") 
+                    {
+                        CargarVehiculos();
+                    }
+                    else
+                    {
+                        Response.Redirect("~/NoAutorizado.aspx"); 
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/InicioSesion.aspx");
+                }
             }
         }
 
@@ -43,8 +59,7 @@ namespace ATodoRueda
             dt.Columns.Add("Descripcion", typeof(string));
             dt.Columns.Add("IdUsuario", typeof(int));
             dt.Columns.Add("Disponibilidad", typeof(string));
-            dt.Columns.Add("Estado", typeof(string));
-            dt.Columns.Add("Imagen", typeof(string));
+            dt.Columns.Add("Estado", typeof(bool));
 
             foreach (Vehiculo vehiculo in listaVehiculos)
             {
@@ -60,7 +75,8 @@ namespace ATodoRueda
                 row["Descripcion"] = vehiculo.Descripcion;
                 row["IdUsuario"] = vehiculo.IdUsuario;
                 row["Disponibilidad"] = vehiculo.IdUsuario == 1 ? "DISPONIBLE" : "RESERVADO";
-                row["Estado"] = vehiculo.Estado ? "Activo" : "Inactivo";
+                row["Estado"] = vehiculo.Estado;
+
                 dt.Rows.Add(row);
             }
 
@@ -87,21 +103,21 @@ namespace ATodoRueda
             string placa = ((TextBox)row.FindControl("txtPlaca")).Text;
             decimal precioPorDia = Convert.ToDecimal(((TextBox)row.FindControl("txtPrecio")).Text);
             string descripcion = ((TextBox)row.FindControl("txtDescripcion")).Text;
-            DropDownList ddlEstado = (DropDownList)row.FindControl("ddlEstado");
-            //bool estado = ddlEstado.SelectedValue == "True";
+            CheckBox chkEstado = (CheckBox)row.FindControl("chkEstadoEdit");
+            bool estado = chkEstado.Checked;
 
             Vehiculo vehiculo = new Vehiculo
             {
                 Id = vehiculoId, // El Id no cambia
                 Marca = marca,
-                Modelo = modelo,
+                Modelo = modelo,    
                 Color = color,
                 Anio = anio,
                 Tipo = tipo,
                 Placa = placa,
                 PrecioPorDia = precioPorDia,
                 Descripcion = descripcion,
-                //Estado = estado
+                Estado = estado
             };
 
             VehiculoDAO vehiculoDAO = new VehiculoDAO();
@@ -117,6 +133,26 @@ namespace ATodoRueda
             int vehiculoId = Convert.ToInt32(gvVehiculos.DataKeys[e.RowIndex].Value);
             CargarVehiculos();
         }
+
+        protected void gvVehiculos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                // Verifica si la fila está en modo de edición
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    // Encuentra el CheckBox en la fila de edición
+                    CheckBox chkEstadoEdit = (CheckBox)e.Row.FindControl("chkEstadoEdit");
+                    if (chkEstadoEdit != null)
+                    {
+                        // Obtiene el valor de 'Estado' y lo asigna al CheckBox
+                        var estadoDataValue = DataBinder.Eval(e.Row.DataItem, "Estado");
+                        chkEstadoEdit.Checked = estadoDataValue != DBNull.Value && Convert.ToBoolean(estadoDataValue);
+                    }
+                }
+            }
+        }
+
 
         protected void btnGuardarVehiculo_Click(object sender, EventArgs e)
         {
@@ -149,5 +185,6 @@ namespace ATodoRueda
             
             catch (Exception ex) { }
         }
+
     }
 }

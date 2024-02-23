@@ -2,7 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <asp:GridView ID="gvVehiculos" runat="server" AutoGenerateColumns="False" CssClass="table"
-    OnRowEditing="gvVehiculos_RowEditing" OnRowUpdating="gvVehiculos_RowUpdating" OnRowDeleting="gvVehiculos_RowDeleting" DataKeyNames="Id" >
+    OnRowEditing="gvVehiculos_RowEditing" OnRowUpdating="gvVehiculos_RowUpdating" OnRowDeleting="gvVehiculos_RowDeleting"
+        OnRowDataBound="gvVehiculos_RowDataBound" DataKeyNames="Id" >
     <Columns>
         <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True"/>
 
@@ -89,19 +90,15 @@
             </EditItemTemplate>
         </asp:TemplateField>
 
-<%--        <asp:TemplateField HeaderText="Estado">
+        <asp:TemplateField HeaderText="Activo">
             <ItemTemplate>
-                <asp:Label ID="lblEstado" runat="server" 
-                           Text='<%# Convert.ToBoolean(Eval("Estado")) ? "Activo" : "Inactivo" %>'>
-                </asp:Label>
+                <asp:CheckBox ID="chkEstado" runat="server" Checked='<%# Convert.ToBoolean(Eval("Estado")) %>' Enabled="false" />
             </ItemTemplate>
             <EditItemTemplate>
-                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control">
-                    <asp:ListItem Text="Activo" Value="True"></asp:ListItem>
-                    <asp:ListItem Text="Inactivo" Value="False"></asp:ListItem>
-                </asp:DropDownList>
+                <asp:CheckBox ID="chkEstadoEdit" runat="server" Checked='<%# Bind("Estado") %>' />
             </EditItemTemplate>
-        </asp:TemplateField>--%>
+        </asp:TemplateField>
+        
 
         <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
     </Columns>

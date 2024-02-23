@@ -51,23 +51,17 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Reservas</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Flota
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Autos</a></li>
-            <li><a class="dropdown-item" href="#">SUV</a></li>
-            <li><a class="dropdown-item" href="#">Pick Up 4x4</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Utilitario</a></li>
-          </ul>
+        <li class="nav-item" runat="server" id="liGestionUsuarios">
+            <a class="nav-link" href="#">Gestión de Usuarios</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Registro">Registro</a>
+        <li class="nav-item" runat="server" id="liGestionFlota">
+            <a class="nav-link" href="#">Gestión de Flota</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        <li class="nav-item" runat="server" id="liRegistro">
+            <a class="nav-link" href="Registro">Registro</a>
+        </li>
+        <li class="nav-item" runat="server" id="liInicioSesion">
+            <a class="nav-link" href="InicioSesion">Inicio Sesión</a>
         </li>
       </ul>
     </div>
