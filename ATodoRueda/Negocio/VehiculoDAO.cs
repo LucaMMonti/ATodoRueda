@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Placa, Marca, Modelo, Color, Tipo, Estado, Descripcion, Imagen, IdUsuario, Anio, PrecioPorDia FROM Vehiculos");
+                datos.setearConsulta("SELECT Id, Placa, Marca, Modelo, Color, Tipo, Estado, Descripcion, Imagen, IdUsuario, Anio, PrecioPorDia, FechaReservaInicio, FechaReservaFin FROM Vehiculos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -34,7 +34,15 @@ namespace Negocio
                         Imagen = datos.Lector["Imagen"].ToString(),
                         IdUsuario = (int)datos.Lector["IdUsuario"],
                         Anio = (int)datos.Lector["Anio"],
-                        PrecioPorDia = (decimal)datos.Lector["PrecioPorDia"]
+                        PrecioPorDia = (decimal)datos.Lector["PrecioPorDia"],
+
+                        FechaReservaInicio = datos.Lector["FechaReservaInicio"] != DBNull.Value
+                        ? (DateTime?)datos.Lector["FechaReservaInicio"]
+                        : null,
+
+                        FechaReservaFin = datos.Lector["FechaReservaFin"] != DBNull.Value
+                        ? (DateTime?)datos.Lector["FechaReservaFin"]
+                        : null,
                     };
 
                     listaVehiculos.Add(vehiculo);
@@ -110,6 +118,7 @@ namespace Negocio
                 datos.agregarParametro("@Anio", vehiculo.Anio);
                 datos.agregarParametro("@PrecioPorDia", vehiculo.PrecioPorDia);
                 datos.agregarParametro("@Estado", vehiculo.Estado);
+
 
                 datos.ejecutarAccion();
                 return true;

@@ -15,7 +15,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
@@ -51,12 +51,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Reservas</a>
         </li>
+
         <li class="nav-item" runat="server" id="liGestionUsuarios">
-            <a class="nav-link" href="#">Gestión de Usuarios</a>
+          <a class="nav-link" href="GestionUsuarios.aspx">Gestión de Usuarios</a>
         </li>
         <li class="nav-item" runat="server" id="liGestionFlota">
-            <a class="nav-link" href="#">Gestión de Flota</a>
+          <a class="nav-link" href="GestionFlota.aspx">Gestión de Flota</a>
         </li>
+
         <li class="nav-item" runat="server" id="liRegistro">
             <a class="nav-link" href="Registro">Registro</a>
         </li>
@@ -82,5 +84,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

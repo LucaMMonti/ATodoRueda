@@ -17,16 +17,16 @@ namespace ATodoRueda
            {
               if (Session["usuario"] != null && Session["Rol"] != null)
               {
-                  var rolUsuario = (string)Session["Rol"];
+                  var rolUsuario = (int)Session["Rol"];
              
-                  if (rolUsuario == "1")
+                  if (rolUsuario == 1)
                   {
                       LlenarRoles();
                       CargarUsuarios();
                   }
                   else
                   {
-                      Response.Redirect("~/NoAutorizado.aspx");
+                      Response.Redirect("~/Default.aspx");
                   }
               }
               else

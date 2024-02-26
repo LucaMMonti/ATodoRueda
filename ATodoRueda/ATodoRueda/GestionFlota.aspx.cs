@@ -18,15 +18,15 @@ namespace ATodoRueda
             {
                 if (Session["usuario"] != null && Session["Rol"] != null)
                 {
-                    var rolUsuario = (string)Session["Rol"];
+                    var rolUsuario = (int)Session["Rol"];
 
-                    if (rolUsuario == "1") 
+                    if (rolUsuario == 1) 
                     {
                         CargarVehiculos();
                     }
                     else
                     {
-                        Response.Redirect("~/NoAutorizado.aspx"); 
+                        Response.Redirect("~/Default.aspx"); 
                     }
                 }
                 else
@@ -59,10 +59,30 @@ namespace ATodoRueda
             dt.Columns.Add("Descripcion", typeof(string));
             dt.Columns.Add("IdUsuario", typeof(int));
             dt.Columns.Add("Disponibilidad", typeof(string));
+            dt.Columns.Add("FechaReservaFin", typeof(DateTime));
             dt.Columns.Add("Estado", typeof(bool));
 
             foreach (Vehiculo vehiculo in listaVehiculos)
             {
+
+                string disponibilidad;
+                if (!vehiculo.Estado)
+                {
+                    disponibilidad = "INACTIVO";
+                }
+                else if (vehiculo.IdUsuario == 1)
+                {
+                    disponibilidad = "DISPONIBLE";
+                }
+                else if (vehiculo.FechaReservaFin.HasValue && vehiculo.FechaReservaFin.Value < DateTime.Now)
+                {
+                    disponibilidad = "DISPONIBLE";
+                }
+                else
+                {
+                    disponibilidad = "RESERVADO";
+                }
+
                 DataRow row = dt.NewRow();
                 row["Id"] = vehiculo.Id;
                 row["Tipo"] = vehiculo.Tipo;
@@ -74,7 +94,10 @@ namespace ATodoRueda
                 row["Precio"] = vehiculo.PrecioPorDia;
                 row["Descripcion"] = vehiculo.Descripcion;
                 row["IdUsuario"] = vehiculo.IdUsuario;
-                row["Disponibilidad"] = vehiculo.IdUsuario == 1 ? "DISPONIBLE" : "RESERVADO";
+                bool disponible = vehiculo.Estado && (vehiculo.IdUsuario == 1 || vehiculo.FechaReservaFin < DateTime.Now);
+                row["Disponibilidad"] = disponibilidad;
+                row["FechaReservaFin"] = vehiculo.FechaReservaFin.HasValue ? (object)vehiculo.FechaReservaFin.Value : DBNull.Value;
+                //row["Reservado Hasta"] = vehiculo.FechaReservaFin.HasValue ? vehiculo.FechaReservaFin.Value.ToShortDateString() : "SIN RESERVA";
                 row["Estado"] = vehiculo.Estado;
 
                 dt.Rows.Add(row);

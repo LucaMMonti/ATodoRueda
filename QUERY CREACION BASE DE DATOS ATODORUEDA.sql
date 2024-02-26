@@ -31,6 +31,8 @@ CREATE TABLE Vehiculos (
     IdUsuario INT,
     Anio INT,
     PrecioPorDia DECIMAL(10, 2),
+    FechaReservaInicio DATETIME,
+    FechaReservaFin DATETIME,
     FOREIGN KEY (IdUsuario) REFERENCES Usuarios(Id)
 );
 GO

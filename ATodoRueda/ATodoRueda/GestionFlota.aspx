@@ -90,6 +90,15 @@
             </EditItemTemplate>
         </asp:TemplateField>
 
+        <asp:TemplateField HeaderText="Reserva Hasta">
+            <ItemTemplate>
+            <%# Eval("FechaReservaFin") != DBNull.Value && Eval("FechaReservaFin") != null ? Convert.ToDateTime(Eval("FechaReservaFin")).ToShortDateString() : "SIN RESERVA" %>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <asp:TextBox ID="txtFechaReservaFin" runat="server" Text='<%# Bind("FechaReservaFin") %>' CssClass="form-control"></asp:TextBox>
+            </EditItemTemplate>
+        </asp:TemplateField>
+
         <asp:TemplateField HeaderText="Activo">
             <ItemTemplate>
                 <asp:CheckBox ID="chkEstado" runat="server" Checked='<%# Convert.ToBoolean(Eval("Estado")) %>' Enabled="false" />
