@@ -26,7 +26,7 @@
                 <td><%# Eval("FechaFin", "{0:d}") %></td>
                 <td>$<%# Eval("PrecioTotal") %></td>
                 <td><%# Convert.ToBoolean(Eval("Estado")) ? "Activa" : "Cancelada" %></td>
-                <asp:Button ID="btnCancelarReserva" runat="server" Text="Cancelar Reserva" CommandArgument='<%# Eval("Id") %>' OnCommand="btnCancelarReserva_Command" />
+                <td><asp:Button ID="btnCancelarReserva" runat="server" Text="Cancelar Reserva" CommandArgument='<%# Eval("Id") %>' OnCommand="btnCancelarReserva_Command" /></td>
 
             </tr>
         </ItemTemplate>

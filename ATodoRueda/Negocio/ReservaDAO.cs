@@ -17,7 +17,7 @@ namespace Negocio
                 datos.setearConsulta("INSERT INTO Reservas (VehiculoId, UsuarioId, PromocionId, FechaReserva, FechaInicio, FechaFin, PrecioTotal, Pagado, Estado) VALUES (@VehiculoId, @UsuarioId, @PromocionId,GETDATE(), @FechaInicio, @FechaFin, @PrecioTotal, @Pagado, @Estado)");
                 datos.agregarParametro("@VehiculoId", reserva.VehiculoId);
                 datos.agregarParametro("@UsuarioId", reserva.UsuarioId);
-                datos.agregarParametro("@PromocionId", reserva.PromocionId);
+                datos.agregarParametro("@PromocionId", reserva.PromocionId.HasValue ? (object)reserva.PromocionId : DBNull.Value);
                 datos.agregarParametro("@FechaInicio", reserva.FechaInicio);
                 datos.agregarParametro("@FechaFin", reserva.FechaFin);
                 datos.agregarParametro("@PrecioTotal", reserva.PrecioTotal);
@@ -118,7 +118,7 @@ namespace Negocio
             Reserva reserva = new Reserva();
             try
             {
-                datos.setearConsulta("SELECT Id, VehiculoId, UsuarioId, PromocionId, FechaReserva, FechaInicio, FechaFin, PrecioTotal, Pagado, Estado FROM Reservas  WHERE Id = @Id");
+                datos.setearConsulta("SELECT R.Id, R.VehiculoId, R.UsuarioId, R.PromocionId, R.FechaReserva, R.FechaInicio, R.FechaFin, R.PrecioTotal, R.Pagado, R.Estado, V.Marca, V.Modelo, V.Imagen FROM Reservas R INNER JOIN Vehiculos V ON R.VehiculoId = V.Id WHERE R.Id = @Id");
                 datos.agregarParametro("@Id", Id);
                 datos.ejecutarLectura();
 
@@ -132,11 +132,11 @@ namespace Negocio
                         FechaReserva = (DateTime)datos.Lector["FechaReserva"],
                         FechaInicio = (DateTime)datos.Lector["FechaInicio"],
                         FechaFin = (DateTime)datos.Lector["FechaFin"],
-                        PromocionId = (int)datos.Lector["PromocionId"],
+                        PromocionId = datos.Lector["PromocionId"] == DBNull.Value ? (int?)null : (int)datos.Lector["PromocionId"],
                         PrecioTotal = (decimal)datos.Lector["PrecioTotal"],
                         Pagado = (bool)datos.Lector["Pagado"],
                         Estado = (bool)datos.Lector["Estado"],
-                        Vehiculo = new Dominio.Vehiculo
+                        Vehiculo = new Vehiculo
                         {
                             Id = (int)datos.Lector["VehiculoId"],
                             Marca = datos.Lector["Marca"].ToString(),

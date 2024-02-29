@@ -37,6 +37,11 @@ namespace ATodoRueda
             DateTime fechaInicio = DateTime.Parse(txtFechaInicio.Text);
             DateTime fechaFin = DateTime.Parse(txtFechaFin.Text);
             int usuarioId = (int)Session["usuarioId"];
+            string codigoPromocion = txtCodigoPromocion.Text;
+
+            PromocionDAO promocionDAO = new PromocionDAO();
+            Promociones promocion = !string.IsNullOrWhiteSpace(codigoPromocion) ? promocionDAO.ObtenerPromocionPorCodigo(codigoPromocion) : null;
+
             VehiculoDAO vehiculoDAO = new VehiculoDAO();
             Vehiculo vehiculo = vehiculoDAO.ObtenerVehiculoPorId(vehiculoId);
 
@@ -45,6 +50,15 @@ namespace ATodoRueda
 
             if (disponible)
             {
+
+                decimal precioPorDia = vehiculo.PrecioPorDia;
+                int cantidadDias = (fechaFin - fechaInicio).Days;
+                decimal precioTotal = cantidadDias * precioPorDia;
+
+                if (promocion != null && promocion.Estado)
+                {
+                    precioTotal -= precioTotal * promocion.Descuento / 100m;
+                }
                 // Crear la reserva
                 Reserva reserva = new Reserva
                 {
@@ -52,6 +66,7 @@ namespace ATodoRueda
                     UsuarioId = usuarioId,
                     FechaInicio = fechaInicio,
                     FechaFin = fechaFin,
+                    PromocionId = promocion?.Id,
                     FechaReserva = DateTime.Now,
                     PrecioTotal = (fechaFin - fechaInicio).Days * vehiculo.PrecioPorDia,
                     Pagado = false,
@@ -77,7 +92,8 @@ namespace ATodoRueda
             else
             {
                  lblMensajeError.Visible = true;
-                 lblMensajeError.Text = "El vehículo no está disponible para las fechas seleccionadas. Por favor, elige otras fechas.";            }
-        }
+                 lblMensajeError.Text = "El vehículo no está disponible para las fechas seleccionadas. Por favor, elige otras fechas.";            
+            }
+        }   
     }
 }

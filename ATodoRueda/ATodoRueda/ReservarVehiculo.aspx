@@ -15,6 +15,7 @@
         <h4>Selecciona las fechas de reserva:</h4>
         <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control" placeholder="Fecha inicio"></asp:TextBox>
         <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-control" placeholder="Fecha fin"></asp:TextBox>
+        <asp:TextBox ID="txtCodigoPromocion" runat="server" CssClass="form-control" placeholder="Código de promoción"></asp:TextBox>
         <asp:Button ID="btnReservar" runat="server" Text="Reservar" OnClick="btnReservar_Click" CssClass="btn btn-primary" />
     </div>
 

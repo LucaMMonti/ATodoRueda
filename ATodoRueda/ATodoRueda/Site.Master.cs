@@ -15,19 +15,21 @@ namespace ATodoRueda
         {
             if (!IsPostBack)
             {
-                var usuario = Session["usuario"] as Usuario; // Asumiendo que guardas el objeto Usuario en la sesión
-
-                // Verifica si el usuario es administrador
-                bool esAdministrador = usuario != null && usuario.Rol == 1;
-
-                // Controla la visibilidad de las opciones de gestión
-                liGestionUsuarios.Visible = esAdministrador;
-                liGestionFlota.Visible = esAdministrador;
-
-                // Ajusta la visibilidad de Registro e Inicio de Sesión según si hay un usuario en sesión
-                liRegistro.Visible = usuario == null;
-                liInicioSesion.Visible = usuario == null;
+                ConfigurarMenu();
             }
+        }
+
+        private void ConfigurarMenu()
+        {
+            bool sesionIniciada = Session["usuario"] != null;
+            string rol = sesionIniciada ? Session["Rol"].ToString() : string.Empty;
+
+            // Controla la visibilidad según si hay sesión y el rol
+            liRegistro.Visible = !sesionIniciada;
+            liInicioSesion.Visible = !sesionIniciada;
+            liMisReservas.Visible = sesionIniciada && rol == "3"; // Rol cliente
+            liGestionUsuarios.Visible = rol == "1"; // Rol administrador
+            liGestionFlota.Visible = rol == "1"; // Rol administrador
         }
 
         public void CerrarSesion(object sender, EventArgs e)
