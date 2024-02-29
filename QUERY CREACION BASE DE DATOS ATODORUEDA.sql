@@ -44,6 +44,8 @@ CREATE TABLE Reservas (
     PrecioTotal DECIMAL(10, 2),
     Pagado BIT,
     Estado BIT,
+    PromocionId Int,
+    FOREIGN KEY (PromocionId) REFERENCES Promociones(Id),
     FOREIGN KEY (VehiculoId) REFERENCES Vehiculos(Id),
     FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id)
 );
@@ -57,3 +59,10 @@ CREATE TABLE Pagos (
     Estado BIT,
     FOREIGN KEY (ReservaId) REFERENCES Reservas(Id)
 );
+GO
+CREATE TABLE Promociones (
+    Id INT PRIMARY KEY IDENTITY,
+    Codigo varchar(20),
+    Descuento int,
+    Estado BIT
+)

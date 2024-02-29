@@ -59,7 +59,6 @@ namespace ATodoRueda
             dt.Columns.Add("Descripcion", typeof(string));
             dt.Columns.Add("IdUsuario", typeof(int));
             dt.Columns.Add("Disponibilidad", typeof(string));
-            dt.Columns.Add("FechaReservaFin", typeof(DateTime));
             dt.Columns.Add("Estado", typeof(bool));
 
             foreach (Vehiculo vehiculo in listaVehiculos)
@@ -70,17 +69,9 @@ namespace ATodoRueda
                 {
                     disponibilidad = "INACTIVO";
                 }
-                else if (vehiculo.IdUsuario == 1)
-                {
-                    disponibilidad = "DISPONIBLE";
-                }
-                else if (vehiculo.FechaReservaFin.HasValue && vehiculo.FechaReservaFin.Value < DateTime.Now)
-                {
-                    disponibilidad = "DISPONIBLE";
-                }
                 else
                 {
-                    disponibilidad = "RESERVADO";
+                    disponibilidad = "ACTIVO";
                 }
 
                 DataRow row = dt.NewRow();
@@ -94,10 +85,8 @@ namespace ATodoRueda
                 row["Precio"] = vehiculo.PrecioPorDia;
                 row["Descripcion"] = vehiculo.Descripcion;
                 row["IdUsuario"] = vehiculo.IdUsuario;
-                bool disponible = vehiculo.Estado && (vehiculo.IdUsuario == 1 || vehiculo.FechaReservaFin < DateTime.Now);
+                bool disponible = vehiculo.Estado && (vehiculo.IdUsuario == 1);
                 row["Disponibilidad"] = disponibilidad;
-                row["FechaReservaFin"] = vehiculo.FechaReservaFin.HasValue ? (object)vehiculo.FechaReservaFin.Value : DBNull.Value;
-                //row["Reservado Hasta"] = vehiculo.FechaReservaFin.HasValue ? vehiculo.FechaReservaFin.Value.ToShortDateString() : "SIN RESERVA";
                 row["Estado"] = vehiculo.Estado;
 
                 dt.Rows.Add(row);

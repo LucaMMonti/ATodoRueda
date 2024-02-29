@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Placa, Marca, Modelo, Color, Tipo, Estado, Descripcion, Imagen, IdUsuario, Anio, PrecioPorDia, FechaReservaInicio, FechaReservaFin FROM Vehiculos");
+                datos.setearConsulta("SELECT Id, Placa, Marca, Modelo, Color, Tipo, Estado, Descripcion, Imagen, IdUsuario, Anio, PrecioPorDia FROM Vehiculos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -35,14 +35,6 @@ namespace Negocio
                         IdUsuario = (int)datos.Lector["IdUsuario"],
                         Anio = (int)datos.Lector["Anio"],
                         PrecioPorDia = (decimal)datos.Lector["PrecioPorDia"],
-
-                        FechaReservaInicio = datos.Lector["FechaReservaInicio"] != DBNull.Value
-                        ? (DateTime?)datos.Lector["FechaReservaInicio"]
-                        : null,
-
-                        FechaReservaFin = datos.Lector["FechaReservaFin"] != DBNull.Value
-                        ? (DateTime?)datos.Lector["FechaReservaFin"]
-                        : null,
                     };
 
                     listaVehiculos.Add(vehiculo);
@@ -249,7 +241,7 @@ namespace Negocio
             try
             {
                 StringBuilder consulta = new StringBuilder();
-                consulta.Append("SELECT Id, Placa, Marca, Modelo, Color, Tipo, Estado, Descripcion, Imagen, IdUsuario, Anio, PrecioPorDia, FechaReservaInicio, FechaReservaFin FROM Vehiculos WHERE 1=1");
+                consulta.Append("SELECT Id, Placa, Marca, Modelo, Color, Tipo, Estado, Descripcion, Imagen, IdUsuario, Anio, PrecioPorDia FROM Vehiculos WHERE 1=1");
 
                 if (!string.IsNullOrEmpty(tipo) && tipo != "-- Selecciona Tipo --")
                     consulta.Append(" AND Tipo LIKE @Tipo");
@@ -290,8 +282,7 @@ namespace Negocio
                         IdUsuario = (int)datos.Lector["IdUsuario"],
                         Anio = (int)datos.Lector["Anio"],
                         PrecioPorDia = (decimal)datos.Lector["PrecioPorDia"],
-                        FechaReservaInicio = datos.Lector["FechaReservaInicio"] is DBNull ? null : (DateTime?)datos.Lector["FechaReservaInicio"],
-                        FechaReservaFin = datos.Lector["FechaReservaFin"] is DBNull ? null : (DateTime?)datos.Lector["FechaReservaFin"]
+
                     };
 
                     lista.Add(vehiculo);

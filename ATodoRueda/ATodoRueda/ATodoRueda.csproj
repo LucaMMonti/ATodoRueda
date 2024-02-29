@@ -128,6 +128,7 @@
     <Content Include="Global.asax" />
     <Content Include="InfoVehiculos.aspx" />
     <Content Include="InicioSesion.aspx" />
+    <Content Include="MisReservas.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="ReservarVehiculo.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -246,6 +247,13 @@
     </Compile>
     <Compile Include="InicioSesion.aspx.designer.cs">
       <DependentUpon>InicioSesion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisReservas.aspx.cs">
+      <DependentUpon>MisReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisReservas.aspx.designer.cs">
+      <DependentUpon>MisReservas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro.aspx.cs">

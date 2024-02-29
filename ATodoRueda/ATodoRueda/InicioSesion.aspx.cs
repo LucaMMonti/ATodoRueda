@@ -29,6 +29,7 @@ namespace ATodoRueda
 
             if (usuario != null)
             {
+                Session["usuarioId"] = usuario.Id;
                 Session["usuario"] = usuario;
                 Session["Rol"] = usuario.Rol;
 

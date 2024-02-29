@@ -6,7 +6,7 @@
             <h1 id="welcomeTitle" class="text-center">Bienvenido a ATodoRueda</h1>
             <p class="lead text-center">La forma más fácil y rápida de rentar autos en línea. Encuentra el vehículo perfecto para cada ocasión.</p>
             <div class="text-center">
-                <a href="buscar-autos.aspx" class="btn btn-primary btn-lg">Reservar &raquo;</a>
+                <a href="InfoVehiculos.aspx" class="btn btn-primary btn-lg">Reservar &raquo;</a>
             </div>
         </section>
 
