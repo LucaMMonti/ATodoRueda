@@ -7,18 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace ATodoRueda
 {
-    public partial class _Default : Page
+    public partial class ReservarVehiculo : System.Web.UI.Page
     {
-        public List<string> ImageUrls { get; set; }
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-               // LoadVehicleImages();
-            }
+
         }
-
-
     }
 }

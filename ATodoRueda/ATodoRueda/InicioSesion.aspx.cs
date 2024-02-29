@@ -31,7 +31,23 @@ namespace ATodoRueda
             {
                 Session["usuario"] = usuario;
                 Session["Rol"] = usuario.Rol;
-                Response.Redirect("~/Default.aspx");
+
+                string redirectUrl = Request.QueryString["redirectUrl"];
+                string idVehiculo = Request.QueryString["IdVehiculo"];
+
+                if (!string.IsNullOrEmpty(redirectUrl))
+                {
+                    string url = $"{redirectUrl}";
+                    if (!string.IsNullOrEmpty(idVehiculo))
+                    {
+                        url += $"?IdVehiculo={idVehiculo}";
+                    }
+                    Response.Redirect(url);
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
             }
             else
             {
