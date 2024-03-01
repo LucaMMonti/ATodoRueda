@@ -28,35 +28,32 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblUsuarioId" runat="server" Text='<%# Bind("UsuarioId") %>'></asp:Label>
                             </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:TextBox ID="txtUsuarioId" runat="server" Text='<%# Bind("UsuarioId") %>' CssClass="form-control"></asp:TextBox>
-                            </EditItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Fecha Reserva">
                             <ItemTemplate>
-                                <asp:Label ID="lblFechaReserva" runat="server" Text='<%# Bind("FechaReserva") %>'></asp:Label>
+                                <asp:Label ID="lblFechaReserva" runat="server" Text='<%# Bind("FechaReserva", "{0:yyyy-MM-dd}") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtFechaReserva" runat="server" Text='<%# Bind("FechaReserva") %>' CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                <asp:Label ID="lblFechaReservaEdit" runat="server" Text='<%# Bind("FechaReserva", "{0:yyyy-MM-dd}") %>' CssClass="form-control"></asp:Label>
                             </EditItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Fecha Inicio">
                             <ItemTemplate>
-                                <asp:Label ID="lblFechaInicio" runat="server" Text='<%# Bind("FechaInicio") %>'></asp:Label>
+                                <asp:Label ID="lblFechaInicio" runat="server" Text='<%# Eval("FechaInicio") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtFechaInicio" runat="server" Text='<%# Bind("FechaInicio") %>' CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                <asp:TextBox ID="txtFechaInicio" runat="server" Text='<%# Eval("FechaInicio") %>' CssClass="form-control" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Fecha Fin">
                             <ItemTemplate>
-                                <asp:Label ID="lblFechaFin" runat="server" Text='<%# Bind("FechaFin") %>'></asp:Label>
+                                <asp:Label ID="lblFechaFin" runat="server" Text='<%# Eval("FechaFin") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtFechaFin" runat="server" Text='<%# Bind("FechaFin") %>' CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                <asp:TextBox ID="txtFechaFin" runat="server" Text='<%# Eval("FechaFin") %>' CssClass="form-control" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                         </asp:TemplateField>
 
@@ -131,7 +128,7 @@
             <asp:TextBox ID="txtPromo" runat="server" CssClass="form-control mb-2" Placeholder="Promoción"></asp:TextBox>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="$('#modalAgregarReservas').modal('hide');">Cancelar</button>
+            <button type="button" class="btn btn-secondary" onclick="$('#modalAgregarReserva').modal('hide');">Cancelar</button>
             <asp:Button ID="btnGuardarReservas" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardarReservas_Click" />
           </div>
         </div>
@@ -140,8 +137,8 @@
 
 
     <script type="text/javascript">
-        function mostrarModalAgregarReservas() {
-            $('#modalAgregarReservas').modal('show');
+        function mostrarModalAgregarReserva() {
+            $('#modalAgregarReserva').modal('show');
         }
     </script>
 

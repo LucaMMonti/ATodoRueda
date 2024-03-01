@@ -21,7 +21,7 @@ namespace ATodoRueda
                 {
                     var rolUsuario = (int)Session["Rol"];
 
-                    if (rolUsuario == 1)
+                    if (rolUsuario == 1 || rolUsuario ==2)
                     {
                         CargarReservas();
                         CargarDropDownListVehiculos();

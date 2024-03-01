@@ -203,13 +203,12 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE Reserva SET VehiculoId = @VehiculoId, UsuarioId = @UsuarioId, FechaReserva = @FechaReserva, FechaInicio = @FechaInicio" +
+                datos.setearConsulta("UPDATE Reserva SET VehiculoId = @VehiculoId, UsuarioId = @UsuarioId, FechaReserva = GETDATE(), FechaInicio = @FechaInicio" +
                     "FechaFin = @FechaFin, PrecioTotal = @PrecioTotal, Pagado = @Pagado, PromocionId = @PromocionId, Estado = @Estado, WHERE Id = @Id");
 
                 datos.agregarParametro("@Id", reserva.Id);
                 datos.agregarParametro("@VehiculoId", reserva.VehiculoId);
                 datos.agregarParametro("@UsuarioId", reserva.UsuarioId);
-                datos.agregarParametro("@FechaReserva", reserva.FechaReserva);
                 datos.agregarParametro("@FechaInicio", reserva.FechaInicio);
                 datos.agregarParametro("@FechaFin", reserva.FechaFin);
                 datos.agregarParametro("@Estado", reserva.Estado);
