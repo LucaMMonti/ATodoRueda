@@ -197,7 +197,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Usuarios SET Nombre = @Nombre, Apellido = @Apellido, NumeroDocumento = @NumeroDocumento, Contrasena = @Contrasena, CorreoElectronico = @CorreoElectronico, Telefono = @Telefono, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, Rol = @Rol WHERE Id = @Id");
+                datos.setearConsulta("UPDATE Usuarios SET Nombre = @Nombre, Apellido = @Apellido, NumeroDocumento = @NumeroDocumento, Contrasena = @Contrasena, CorreoElectronico = @CorreoElectronico, Telefono = @Telefono, Direccion = @Direccion, FechaNacimiento = @FechaNacimiento, Rol = @Rol, Estado = @Estado WHERE Id = @Id");
                 datos.agregarParametro("@Id", usuario.Id);
                 datos.agregarParametro("@Nombre", usuario.Nombre);
                 datos.agregarParametro("@Apellido", usuario.Apellido);
@@ -208,6 +208,7 @@ namespace Negocio
                 datos.agregarParametro("@Direccion", usuario.Direccion);
                 datos.agregarParametro("@FechaNacimiento", usuario.FechaNacimiento);
                 datos.agregarParametro("@Rol", usuario.Rol);
+                datos.agregarParametro("@Estado", usuario.Estado);
 
 
                 datos.ejecutarAccion();
@@ -215,7 +216,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                // Manejo de la excepción
                 return false;
             }
             finally

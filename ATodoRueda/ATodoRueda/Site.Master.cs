@@ -27,15 +27,18 @@ namespace ATodoRueda
             // Controla la visibilidad según si hay sesión y el rol
             liRegistro.Visible = !sesionIniciada;
             liInicioSesion.Visible = !sesionIniciada;
-            liMisReservas.Visible = sesionIniciada && rol == "3"; // Rol cliente
-            liGestionUsuarios.Visible = rol == "1"; // Rol administrador
-            liGestionFlota.Visible = rol == "1"; // Rol administrador
+            liCerrarSesion.Visible = sesionIniciada;
+            liMisReservas.Visible = sesionIniciada && rol == "3";
+            liGestionUsuarios.Visible = rol == "1";
+            liGestionFlota.Visible = rol == "1";
+            liGestionPromociones.Visible = rol == "1";
+            liGestionReservas.Visible = rol == "1" || rol == "2";
         }
 
         public void CerrarSesion(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("~/InicioSesion.aspx");
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

@@ -9,6 +9,46 @@ namespace Negocio
 {
     public class ReservaDAO
     {
+        public List<Reserva> Listar()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Reserva> listaReservas = new List<Reserva>();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, VehiculoId, UsuarioId, FechaReserva, FechaInicio, FechaFin, PrecioTotal, Pagado, PromocionId, Estado FROM Reservas");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Reserva reserva = new Reserva
+                    {
+
+                        Id = (int)datos.Lector["Id"],
+                        VehiculoId = (int)datos.Lector["VehiculoId"],
+                        UsuarioId = (int)datos.Lector["UsuarioId"],
+                        FechaReserva = (DateTime)datos.Lector["FechaReserva"],
+                        FechaInicio = (DateTime)datos.Lector["FechaInicio"],                      
+                        FechaFin = (DateTime)datos.Lector["FechaFin"],
+                        PrecioTotal = (decimal)datos.Lector["PrecioTotal"],
+                        Pagado = (bool)datos.Lector["Pagado"],
+                        PromocionId = datos.Lector["PromocionId"] != DBNull.Value ? (int?)datos.Lector["PromocionId"] : null,
+                        Estado = (bool)datos.Lector["Estado"]
+                    };
+
+                    listaReservas.Add(reserva);
+                }
+                return listaReservas;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public bool CrearReserva(Dominio.Reserva reserva)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -157,6 +197,38 @@ namespace Negocio
             }
         }
 
+        public void ActualizarReserva(Reserva reserva)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE Reserva SET VehiculoId = @VehiculoId, UsuarioId = @UsuarioId, FechaReserva = @FechaReserva, FechaInicio = @FechaInicio" +
+                    "FechaFin = @FechaFin, PrecioTotal = @PrecioTotal, Pagado = @Pagado, PromocionId = @PromocionId, Estado = @Estado, WHERE Id = @Id");
+
+                datos.agregarParametro("@Id", reserva.Id);
+                datos.agregarParametro("@VehiculoId", reserva.VehiculoId);
+                datos.agregarParametro("@UsuarioId", reserva.UsuarioId);
+                datos.agregarParametro("@FechaReserva", reserva.FechaReserva);
+                datos.agregarParametro("@FechaInicio", reserva.FechaInicio);
+                datos.agregarParametro("@FechaFin", reserva.FechaFin);
+                datos.agregarParametro("@Estado", reserva.Estado);
+                datos.agregarParametro("@PrecioTotal", reserva.PrecioTotal);
+                datos.agregarParametro("@Pagado", reserva.Pagado);
+                datos.agregarParametro("@PromocionId", reserva.PromocionId);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public bool CancelarReserva(int reservaId)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -171,6 +243,26 @@ namespace Negocio
             catch (Exception ex)
             {
                 return false;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void EliminarReserva(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("DELETE FROM Reservas WHERE Id = @Id");
+                datos.agregarParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {

@@ -100,5 +100,81 @@ namespace ATodoRueda
                     return "Desconocido";
             }
         }
+
+        protected void gvUsuarios_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvUsuarios.EditIndex = e.NewEditIndex;
+            CargarUsuarios();
+        }
+
+        protected void gvUsuarios_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = gvUsuarios.Rows[e.RowIndex];
+
+            int userId = Convert.ToInt32(gvUsuarios.DataKeys[e.RowIndex].Values["Id"]);
+            string nombre = (row.FindControl("txtNombre") as TextBox).Text;
+            string apellido = (row.FindControl("txtApellido") as TextBox).Text;
+            string correoElectronico = (row.FindControl("txtCorreoElectronico") as TextBox).Text;
+            string contrasena = (row.FindControl("txtContrasena") as TextBox).Text;
+            int numeroDocumento = Convert.ToInt32((row.FindControl("txtNumeroDocumento") as TextBox).Text);
+            DateTime fechaNacimiento = Convert.ToDateTime((row.FindControl("txtFechaNacimiento") as TextBox).Text);
+            string telefono = (row.FindControl("txtTelefono") as TextBox).Text;
+            string direccion = (row.FindControl("txtDireccion") as TextBox).Text;
+
+            var ddlRol = row.FindControl("ddlRol") as DropDownList;
+            var chkEstadoControl = row.FindControl("chkEstado") as CheckBox;
+
+            int rol = ddlRol != null ? Convert.ToInt32(ddlRol.SelectedValue) : 0;
+            bool estado = chkEstadoControl != null && chkEstadoControl.Checked;
+
+            Usuario usuario = new Usuario
+            {
+                Id = userId,
+                Nombre = nombre,
+                Apellido = apellido,
+                CorreoElectronico = correoElectronico,
+                Contrasena = contrasena,
+                NumeroDocumento = numeroDocumento,
+                FechaNacimiento = fechaNacimiento,
+                Telefono = telefono,
+                Direccion = direccion,
+                Rol = rol,
+                Estado = estado
+            };
+
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.ActualizarUsuario(usuario);
+
+            gvUsuarios.EditIndex = -1;
+            CargarUsuarios();
+        }
+
+        protected void gvUsuarios_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvUsuarios.EditIndex = -1;
+            CargarUsuarios();
+        }
+
+        protected void gvUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                // Verifica si la fila está en modo de edición
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    // Encuentra el CheckBox en la fila de edición
+                    CheckBox chkEstadoEdit = (CheckBox)e.Row.FindControl("chkEstadoEdit");
+                    if (chkEstadoEdit != null)
+                    {
+                        // Obtiene el valor de 'Estado' y lo asigna al CheckBox
+                        var estadoDataValue = DataBinder.Eval(e.Row.DataItem, "Estado");
+                        chkEstadoEdit.Checked = estadoDataValue != DBNull.Value && Convert.ToBoolean(estadoDataValue);
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

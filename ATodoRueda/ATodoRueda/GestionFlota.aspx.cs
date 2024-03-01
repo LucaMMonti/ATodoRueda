@@ -172,7 +172,7 @@ namespace ATodoRueda
             {
                 Vehiculo nuevoVehiculo = new Vehiculo
                 {
-                    Marca = txtMarca.Text,
+                    Marca = ddlMarca.SelectedValue,
                     Modelo = txtModelo.Text,
                     Color = txtColor.Text,
                     Placa = txtPlaca.Text,
@@ -186,16 +186,28 @@ namespace ATodoRueda
                 };
 
                 VehiculoDAO vehiculoDAO = new VehiculoDAO();
-                vehiculoDAO.AgregarVehiculo(nuevoVehiculo);
+                bool resultado = vehiculoDAO.AgregarVehiculo(nuevoVehiculo);
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "CerrarModal", "$('#modalAgregarVehiculo').modal('hide');", true);
-                CargarVehiculos();
-
-                // Opcional: Mostrar un mensaje de éxito o recargar la lista de vehículos
-                // Recuerda cerrar el modal si es necesario, esto puede requerir un poco de JavaScript adicional        }
+                if (resultado)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "CerrarModal", "$('#modalAgregarVehiculo').modal('hide');", true);
+                    CargarVehiculos();
+                    lblMensajeExito.Text = "Vehículo agregado con éxito.";
+                    lblMensajeExito.Visible = true;
+                }
+                else
+                {
+                    lblMensajeError.Text = "Ocurrió un error al agregar el vehículo.";
+                    lblMensajeError.Visible = true;
+                }
             }
             
-            catch (Exception ex) { }
+            catch (Exception ex) 
+            {
+
+                lblMensajeError.Text = "Ocurrió un error inesperado al agregar el vehículo.";
+                lblMensajeError.Visible = true;
+            }
         }
 
     }

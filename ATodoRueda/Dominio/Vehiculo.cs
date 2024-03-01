@@ -20,8 +20,6 @@ namespace Dominio
         public int IdUsuario { get; set; }
         public int Anio { get; set; }
         public decimal PrecioPorDia { get; set; }
-        public DateTime? FechaReservaInicio { get; set; }
-        public DateTime? FechaReservaFin { get; set; }
         public bool Estado { get; set; }
     }
 }

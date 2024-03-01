@@ -19,24 +19,107 @@
 
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="False"  CssClass="table table-bordered" DataKeyNames="Id">
+        <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" DataKeyNames="Id"
+            AutoGenerateEditButton="True" OnRowEditing="gvUsuarios_RowEditing" OnRowUpdating="gvUsuarios_RowUpdating" OnRowCancelingEdit="gvUsuarios_RowCancelingEdit"
+            OnRowDataBound="gvUsuarios_RowDataBound">
              <Columns>
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                <asp:BoundField DataField="Contrasena" HeaderText="Contraseña" />
-                <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" />
-                <asp:BoundField DataField="NumeroDocumento" HeaderText="Número Documento" />
-                <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" DataFormatString="{0:dd/MM/yyyy}"/> 
-                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
-                <asp:BoundField DataField="Direccion" HeaderText="Dirección" /> 
-                <asp:TemplateField HeaderText="Rol">
+
+                 <asp:TemplateField HeaderText="Nombre">
                      <ItemTemplate>
-                        <asp:Label ID="lblRol" runat="server" Text='<%# GetRolName(Eval("Rol").ToString()) %>'></asp:Label>
+                         <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
                      </ItemTemplate>
-                </asp:TemplateField>             
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("Nombre") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField>
+
+                 <asp:TemplateField HeaderText="Apellido">
+                     <ItemTemplate>
+                         <asp:Label ID="lblApellido" runat="server" Text='<%# Bind("Apellido") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtApellido" runat="server" Text='<%# Bind("Apellido") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField> 
+
+                 <asp:TemplateField HeaderText="Contraseña">
+                     <ItemTemplate>
+                         <asp:Label ID="lblContrasena" runat="server" Text='<%# Bind("Contrasena") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtContrasena" runat="server" Text='<%# Bind("Contrasena") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField>
+
+                 <asp:TemplateField HeaderText="Correo Electronico">
+                     <ItemTemplate>
+                         <asp:Label ID="lblCorreoElectronico" runat="server" Text='<%# Bind("CorreoElectronico") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtCorreoElectronico" runat="server" Text='<%# Bind("CorreoElectronico") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField>
+
+                 <asp:TemplateField HeaderText="N° Documento">
+                     <ItemTemplate>
+                         <asp:Label ID="lblNumeroDocumento" runat="server" Text='<%# Bind("NumeroDocumento") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtNumeroDocumento" runat="server" Text='<%# Bind("NumeroDocumento") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField>
+
+                 <asp:TemplateField HeaderText="Fecha de Nacimiento">
+                     <ItemTemplate>
+                         <asp:Label ID="lblFechaNacimiento" runat="server" Text='<%# Bind("FechaNacimiento") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtFechaNacimiento" runat="server" Text='<%# Bind("FechaNacimiento") %>' CssClass="form-control" TextMode="Date"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField> 
+
+                 <asp:TemplateField HeaderText="Teléfono">
+                     <ItemTemplate>
+                         <asp:Label ID="lblTelefono" runat="server" Text='<%# Bind("Telefono") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtTelefono" runat="server" Text='<%# Bind("Telefono") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField>
+
+                 <asp:TemplateField HeaderText="Dirección">
+                     <ItemTemplate>
+                         <asp:Label ID="lblDireccion" runat="server" Text='<%# Bind("Direccion") %>'></asp:Label>
+                     </ItemTemplate>
+                     <EditItemTemplate>
+                         <asp:TextBox ID="txtDireccion" runat="server" Text='<%# Bind("Direccion") %>' CssClass="form-control"></asp:TextBox>
+                     </EditItemTemplate>
+                 </asp:TemplateField> 
+
+                <asp:TemplateField HeaderText="Rol">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRol" runat="server" Text='<%# GetRolName(Eval("Rol").ToString()) %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-control">
+                            <asp:ListItem Text="Administrador" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Gestor" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="Cliente" Value="3"></asp:ListItem>
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                </asp:TemplateField>    
+                 
+                <asp:TemplateField HeaderText="Activo">
+                    <ItemTemplate>
+                       <asp:CheckBox ID="chkEstado" runat="server" Checked='<%# Convert.ToBoolean(Eval("Estado")) %>' Enabled="false" />
+                   </ItemTemplate>
+                   <EditItemTemplate>
+                       <asp:CheckBox ID="chkEstadoEdit" runat="server" Checked='<%# Bind("Estado") %>' />
+                   </EditItemTemplate>
+               </asp:TemplateField>
 
              </Columns>
-             </asp:GridView>
+            </asp:GridView>
     </div>
 </div>
 

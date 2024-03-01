@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionFlota.aspx.cs" Inherits="ATodoRueda.GestionFlota" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <asp:Label ID="lblMensajeExito" runat="server" CssClass="alert alert-success" Visible="false"></asp:Label>
+    <asp:Label ID="lblMensajeError" runat="server" CssClass="alert alert-danger" Visible="false"></asp:Label>
+
+
     <asp:GridView ID="gvVehiculos" runat="server" AutoGenerateColumns="False" CssClass="table"
     OnRowEditing="gvVehiculos_RowEditing" OnRowUpdating="gvVehiculos_RowUpdating" OnRowDeleting="gvVehiculos_RowDeleting"
         OnRowDataBound="gvVehiculos_RowDataBound" DataKeyNames="Id" >
@@ -103,6 +107,7 @@
         <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
     </Columns>
     </asp:GridView>
+
 <asp:Button ID="btnMostrarModalAgregarVehiculo" runat="server" Text="Agregar Nuevo Vehículo" CssClass="btn btn-primary" OnClientClick="mostrarModalAgregarVehiculo(); return false;" />
 
     <div class="modal fade" id="modalAgregarVehiculo" tabindex="-1" role="dialog" aria-labelledby="modalAgregarVehiculoLabel" aria-hidden="true">
@@ -110,16 +115,20 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalAgregarVehiculoLabel">Agregar Nuevo Vehículo</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body">
             <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control mb-2">
                 <asp:ListItem Text="Automóvil" Value="Automóvil"></asp:ListItem>
                 <asp:ListItem Text="SUV" Value="SUV"></asp:ListItem>
                 <asp:ListItem Text="Camioneta" Value="Camioneta"></asp:ListItem>
-            </asp:DropDownList>            <asp:TextBox ID="txtMarca" runat="server" CssClass="form-control mb-2" Placeholder="Marca"></asp:TextBox>
+            </asp:DropDownList>        
+            <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-control mb-2">
+                <asp:ListItem Text="Chevrolet" Value="Chevrolet"></asp:ListItem>
+                <asp:ListItem Text="Ford" Value="Ford"></asp:ListItem>
+                <asp:ListItem Text="Peugeot" Value="Peugeot"></asp:ListItem>
+                <asp:ListItem Text="Toyota" Value="Toyota"></asp:ListItem>
+                <asp:ListItem Text="Volskwagen" Value="Volskwagen"></asp:ListItem>
+            </asp:DropDownList> 
             <asp:TextBox ID="txtModelo" runat="server" CssClass="form-control mb-2" Placeholder="Modelo"></asp:TextBox>
             <asp:TextBox ID="txtColor" runat="server" CssClass="form-control mb-2" Placeholder="Color"></asp:TextBox>
             <asp:TextBox ID="txtAnio" runat="server" CssClass="form-control mb-2" Placeholder="Año"></asp:TextBox>
@@ -129,7 +138,7 @@
             <asp:TextBox ID="txtImagen" runat="server" CssClass="form-control mb-2" Placeholder="Imagen"></asp:TextBox>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" onclick="$('#modalAgregarVehiculo').modal('hide');">Cancelar</button>
             <asp:Button ID="btnGuardarVehiculo" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardarVehiculo_Click" />
           </div>
         </div>

@@ -18,6 +18,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    <link href="~/Scripts/EstilosPropios.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 
@@ -61,6 +63,13 @@
         <li class="nav-item" runat="server" id="liGestionFlota">
           <a class="nav-link" href="GestionFlota.aspx">Gestión de Flota</a>
         </li>
+        <li class="nav-item" runat="server" id="liGestionPromociones">
+          <a class="nav-link" href="GestionPromociones.aspx">Gestión de Promociones</a>
+        </li>
+
+        <li class="nav-item" runat="server" id="liGestionReservas">
+          <a class="nav-link" href="GestionarReservas.aspx">Gestión de Reservas</a>
+        </li>
 
         <li class="nav-item" runat="server" id="liRegistro">
             <a class="nav-link" href="Registro">Registro</a>
@@ -72,6 +81,12 @@
                 <a class="nav-link" href="MisReservas.aspx">Mis Reservas</a>
           </li>
       </ul>
+        <ul class="navbar-nav ml-auto">
+             <li class="nav-item" runat="server" id="liCerrarSesion" visible="false">
+                <asp:LinkButton ID="LinkButtonCerrarSesion" runat="server" OnClick="CerrarSesion" CssClass="nav-link">Cerrar Sesión</asp:LinkButton>
+             </li>
+        </ul>
+
     </div>
   </div>
 </nav>

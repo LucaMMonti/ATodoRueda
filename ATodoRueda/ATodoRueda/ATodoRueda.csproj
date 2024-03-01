@@ -123,7 +123,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="GestionarReservas.aspx" />
     <Content Include="GestionFlota.aspx" />
+    <Content Include="GestionPromociones.aspx" />
     <Content Include="GestionUsuarios.aspx" />
     <Content Include="Global.asax" />
     <Content Include="InfoVehiculos.aspx" />
@@ -217,12 +219,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GestionarReservas.aspx.cs">
+      <DependentUpon>GestionarReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarReservas.aspx.designer.cs">
+      <DependentUpon>GestionarReservas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GestionFlota.aspx.cs">
       <DependentUpon>GestionFlota.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="GestionFlota.aspx.designer.cs">
       <DependentUpon>GestionFlota.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionPromociones.aspx.cs">
+      <DependentUpon>GestionPromociones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionPromociones.aspx.designer.cs">
+      <DependentUpon>GestionPromociones.aspx</DependentUpon>
     </Compile>
     <Compile Include="GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>

@@ -42,15 +42,29 @@ namespace ATodoRueda
             var reservaDAO = new ReservaDAO();
             var reserva = reservaDAO.ObtenerReservaPorId(reservaId);
 
-            if ((reserva.FechaInicio - DateTime.Now).TotalDays > 15)
+            if ((reserva.FechaInicio - DateTime.Now).TotalDays > 14)
             {
-                reservaDAO.CancelarReserva(reservaId);
-                // Actualizar la interfaz o redirigir al usuario
+                bool resultado = reservaDAO.CancelarReserva(reservaId);
+                if (resultado)
+                {
+                    lblSuccessMessage.Visible = true;
+                    lblSuccessMessage.Text = "Reserva cancelada con éxito.";
+                    lblErrorMessage.Visible = false;
+                }
+                else
+                {
+                    lblErrorMessage.Visible = true;
+                    lblErrorMessage.Text = "Ocurrió un error al cancelar la reserva. Por favor, inténtalo de nuevo.";
+                    lblSuccessMessage.Visible = false;
+                }
             }
             else
             {
-                // Mostrar mensaje de que la reserva no se puede cancelar
+                lblErrorMessage.Visible = true;
+                lblErrorMessage.Text = "Las reservas no pueden ser canceladas con menos de 15 días de anticipación.";
+                lblSuccessMessage.Visible = false;
             }
+            CargarReservas();
         }
     }
 }
