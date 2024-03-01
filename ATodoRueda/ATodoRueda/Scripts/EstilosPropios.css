@@ -4,3 +4,40 @@
     object-fit: cover; 
 }
 
+
+.vehiculo-detalle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.detalle-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.imagen-vehiculo img {
+    max-width: 600px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}
+
+.formulario-reserva {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 20px; /* Ajusta según necesites */
+}
+
