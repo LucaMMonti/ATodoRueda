@@ -300,5 +300,82 @@ namespace Negocio
             return lista;
         }
 
+
+        public List<Vehiculo> ListarAutoReservado(string tipo = null, string marca = null, decimal? precio = null, DateTime? desde = null, DateTime? hasta = null)
+        {
+            List<Vehiculo> lista = new List<Vehiculo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                StringBuilder consulta = new StringBuilder();
+                consulta.Append("SELECT V.Id, V.Placa, V.Marca, V.Modelo, V.Color, V.Tipo, V.Estado, V.Descripcion, V.Imagen, V.IdUsuario, V.Anio, V.PrecioPorDia ");
+                consulta.Append("FROM Vehiculos V LEFT JOIN Reservas R ON V.Id = R.VehiculoId ");
+                consulta.Append("WHERE V.Estado = 1 ");
+
+                if (!string.IsNullOrEmpty(tipo) && tipo != "-- Selecciona Tipo --")
+                    consulta.Append("AND V.Tipo LIKE @Tipo ");
+                if (!string.IsNullOrEmpty(marca) && marca != "-- Selecciona Marca --")
+                    consulta.Append("AND V.Marca LIKE @Marca ");
+                if (precio.HasValue)
+                    consulta.Append("AND V.PrecioPorDia <= @PrecioPorDia ");
+
+                if (desde.HasValue && hasta.HasValue)
+                {
+                    consulta.Append("AND (R.Id IS NULL OR R.FechaFin < @Desde OR R.FechaInicio > @Hasta) ");
+                    datos.agregarParametro("@Desde", desde.Value);
+                    datos.agregarParametro("@Hasta", hasta.Value);
+                }
+
+                datos.setearConsulta(consulta.ToString());
+
+                if (!string.IsNullOrEmpty(tipo) && tipo != "-- Selecciona Tipo --")
+                    datos.agregarParametro("@Tipo", $"%{tipo}%");
+                if (!string.IsNullOrEmpty(marca) && marca != "-- Selecciona Marca --")
+                    datos.agregarParametro("@Marca", $"%{marca}%");
+                if (precio.HasValue)
+                    datos.agregarParametro("@PrecioPorDia", precio);
+
+                datos.ejecutarLectura();
+
+
+                while (datos.Lector.Read())
+                {
+                    Vehiculo vehiculo = new Vehiculo
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        Placa = datos.Lector["Placa"].ToString(),
+                        Marca = datos.Lector["Marca"].ToString(),
+                        Modelo = datos.Lector["Modelo"].ToString(),
+                        Color = datos.Lector["Color"].ToString(),
+                        Tipo = datos.Lector["Tipo"].ToString(),
+                        Estado = (bool)datos.Lector["Estado"],
+                        Descripcion = datos.Lector["Descripcion"].ToString(),
+                        Imagen = datos.Lector["Imagen"].ToString(),
+                        IdUsuario = (int)datos.Lector["IdUsuario"],
+                        Anio = (int)datos.Lector["Anio"],
+                        PrecioPorDia = (decimal)datos.Lector["PrecioPorDia"],
+
+                    };
+
+                    lista.Add(vehiculo);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return lista;
+        }
+
+
+
+
+
     }
 }

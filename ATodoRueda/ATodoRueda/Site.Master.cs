@@ -24,7 +24,6 @@ namespace ATodoRueda
             bool sesionIniciada = Session["usuario"] != null;
             string rol = sesionIniciada ? Session["Rol"].ToString() : string.Empty;
 
-            // Controla la visibilidad según si hay sesión y el rol
             liRegistro.Visible = !sesionIniciada;
             liInicioSesion.Visible = !sesionIniciada;
             liCerrarSesion.Visible = sesionIniciada;

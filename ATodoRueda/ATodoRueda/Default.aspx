@@ -54,21 +54,15 @@
         </section>
 
         <section class="row mt-5">
-            <div class="col-md-4">
-                <h2>Autos Destacados</h2>
-                <p>Explora nuestra selección de autos destacados, disponibles para renta inmediata.</p>
-                <p><a class="btn btn-secondary" href="autos-destacados.aspx">Ver Autos &raquo;</a></p>
-            </div>
-
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h2>¿Cómo funciona?</h2>
                 <p>Descubre lo fácil que es rentar tu próximo auto con nosotros. Solo elige, reserva, y disfruta tu viaje.</p>
                 <p><a class="btn btn-secondary" href="como-funciona.aspx">Aprender más &raquo;</a></p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h2>Contacto</h2>
                 <p>¿Tienes preguntas? Estamos aquí para ayudarte. Contacta con nuestro equipo de soporte.</p>
-                <p><a class="btn btn-secondary" href="contacto.aspx">Contactar &raquo;</a></p>
+                <p><a class="btn btn-secondary" href="Contacto.aspx">Contactar &raquo;</a></p>
             </div>
         </section>
     </main>

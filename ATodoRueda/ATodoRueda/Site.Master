@@ -45,7 +45,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="Default.aspx">ATodoRueda</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,14 +74,22 @@
         <li class="nav-item" runat="server" id="liRegistro">
             <a class="nav-link" href="Registro">Registro</a>
         </li>
-        <li class="nav-item" runat="server" id="liInicioSesion">
-            <a class="nav-link" href="InicioSesion">Inicio Sesión</a>
-        </li>
+
           <li class="nav-item" runat="server" id="liMisReservas" visible="false">
                 <a class="nav-link" href="MisReservas.aspx">Mis Reservas</a>
           </li>
+
+          <li class="nav-item" runat="server" id="liContacto" visible="false">
+                <a class="nav-link" href="Contacto.aspx">Mis Contacto</a>
+          </li>
+
       </ul>
         <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item" runat="server" id="liInicioSesion">
+            <a class="nav-link" href="InicioSesion">Inicio Sesión</a>
+                    </li>
+
              <li class="nav-item" runat="server" id="liCerrarSesion" visible="false">
                 <asp:LinkButton ID="LinkButtonCerrarSesion" runat="server" OnClick="CerrarSesion" CssClass="nav-link">Cerrar Sesión</asp:LinkButton>
              </li>

@@ -59,7 +59,7 @@
             <label for="txtTelefono">Teléfono:</label>
             <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server" TextMode="Phone"/>
             <asp:RegularExpressionValidator ID="revTelefono" runat="server" ControlToValidate="txtTelefono"
-                ErrorMessage="Solo números son permitidos." ValidationExpression="^[a-zA-Z\s]+$" CssClass="text-danger" />
+                ErrorMessage="Solo números son permitidos." ValidationExpression="\d+" CssClass="text-danger" />
         </div>
 
         <!-- Botón de Registro -->

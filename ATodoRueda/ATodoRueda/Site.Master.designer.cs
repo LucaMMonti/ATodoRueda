@@ -60,15 +60,6 @@ namespace ATodoRueda
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegistro;
 
         /// <summary>
-        /// Control liInicioSesion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liInicioSesion;
-
-        /// <summary>
         /// Control liMisReservas.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,24 @@ namespace ATodoRueda
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liMisReservas;
+
+        /// <summary>
+        /// Control liContacto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liContacto;
+
+        /// <summary>
+        /// Control liInicioSesion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liInicioSesion;
 
         /// <summary>
         /// Control liCerrarSesion.

@@ -49,7 +49,7 @@ namespace ATodoRueda
             decimal? precioMax = !string.IsNullOrEmpty(txtPrecioMax.Text) ? decimal.Parse(txtPrecioMax.Text) : (decimal?)null;
 
             VehiculoDAO vehiculoDAO = new VehiculoDAO();
-            var vehiculosFiltrados = vehiculoDAO.ListarConFiltro(tipo, marca, precioMax);
+            var vehiculosFiltrados = vehiculoDAO.ListarAutoReservado(tipo, marca, precioMax);
 
             rptVehiculos.DataSource = vehiculosFiltrados;
             rptVehiculos.DataBind();
@@ -77,14 +77,12 @@ namespace ATodoRueda
 
             if (Session["usuario"] != null)
             {
-                // El usuario ha iniciado sesión, redirige a la página de reserva del vehículo
-                // Suponiendo que "ReservarVehiculo.aspx" es tu página de reserva y acepta un ID de vehículo como query string
+
                 Response.Redirect($"ReservarVehiculo.aspx?IdVehiculo={e.CommandArgument}");
             }
             else
             {
-                // El usuario no ha iniciado sesión, redirige a la página de inicio de sesión
-                // Puedes opcionalmente añadir una query string para redirigir al usuario de vuelta después del inicio de sesión
+
                 Response.Redirect($"InicioSesion.aspx?redirectUrl=ReservarVehiculo.aspx&IdVehiculo={e.CommandArgument}");
             }
 
